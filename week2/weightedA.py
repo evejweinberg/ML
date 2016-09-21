@@ -3,7 +3,7 @@ from math import sqrt
 import reclist
 import pearson
 
-def getRecs(prefs, person, similarity=sim_pearson):
+def getRecs(prefs, person, similarity=pearson):
     totals={}
     simSums = {}
     for other in prefs:
@@ -17,15 +17,16 @@ def getRecs(prefs, person, similarity=sim_pearson):
         #if it's not our person, or if it's not but it's empty
         if item not in prefs[person] or prefs[person][item]==0:
             #similarity times score
-            totals.setdefault(item,0)totals[item]+=prefs[other][item]*sim
+            totals.setdefault(item,0)
+            totals[item]+=prefs[other][item]*sim
             print totals
             simSums.setdefault(item,0)
             simSums[item]+=sim
-            rankings=[total/simSums[item],item] for item,total in totals.item()]
+    rankings =[( total/ simSums[ item], item) for item, total in totals.items( )]
 
-            rankings.sort()
-            rankings.reverse()
-            return rankings
+    rankings.sort()
+    rankings.reverse()
+    return rankings
 
 getRecs(reclist.critics, "Eve Weinberg")
 print (getRecs(reclist.critics, "Eve Weinberg"))
