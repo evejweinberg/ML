@@ -47,8 +47,8 @@ critics = {
     "Snakes on a Plane": 4.2,
     "Just My Luck": 4.0,
     "You and Me": 4.0,
-    "Superman": 4.0,
-    "The Night": 2.0
+    "Superman": 0,
+    "The Night": 0
 },
 "Debbie Upper":{
     "Lady in the water": 4.4,

@@ -1,6 +1,8 @@
 import numpy as np
 from math import sqrt
 import reclist
+from pprint import pprint
+
 # import pearson
 
 def pearson(prefs,p1,p2):
@@ -53,26 +55,32 @@ def getRecs(prefs, person, similarity=pearson):
     totals={}
     simSums = {}
     for other in prefs:
+        print other
         if other==person:
             continue
         sim=similarity(prefs,person,other)
-
+        print '\t', sim
         if sim<=0: continue
 
-    for item in prefs[other]:
-        #if it's not our person, or if it's not but it's empty
-        if item not in prefs[person] or prefs[person][item]==0:
-            #similarity times score
-            totals.setdefault(item,0)
-            totals[item]+=prefs[other][item]*sim
-            print totals
-            simSums.setdefault(item,0)
-            simSums[item]+=sim
+        for item in prefs[other]:
+            print '\t\t', item
+            #if it's not our person, or if it's not but it's empty
+            if item not in prefs[person] or prefs[person][item]==0:
+                print '\t\t\t', item
+                #similarity times score
+                # totals.setdefault(item,0)
+                if item not in totals:
+                    totals[item] = 0
+                totals[item]+=prefs[other][item]*sim
+                pprint(totals)
+                simSums.setdefault(item,0)
+                simSums[item]+=sim
     rankings =[( total/ simSums[ item], item) for item, total in totals.items( )]
-
+    #
     rankings.sort()
     rankings.reverse()
     return rankings
 
-getRecs(reclist.critics, "Eve Weinberg")
-print (getRecs(reclist.critics, "Eve Weinberg"))
+results = getRecs(reclist.critics, "Eve Weinberg")
+print results
+# print (getRecs(reclist.critics, "Eve Weinberg"))
