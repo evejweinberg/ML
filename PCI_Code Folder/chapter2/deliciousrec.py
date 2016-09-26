@@ -1,4 +1,5 @@
 import feedparser
+# import certain functions
 from pydelicious import get_popular,get_userposts,get_urlposts
 import time
 
