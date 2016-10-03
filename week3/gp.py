@@ -2,18 +2,23 @@ from random import random,randint,choice
 from copy import deepcopy
 from math import log
 
+# a wrapper for the function
+#arguments - name of function, function itself, num of parameters
 class fwrapper:
   def __init__(self,function,childcount,name):
     self.function=function
     self.childcount=childcount
     self.name=name
 
+#nodes with children
 class node:
   def __init__(self,fw,children):
     self.function=fw.function
     self.name=fw.name
     self.children=children
 
+
+    #when this gets called it evaluates the child node then applies the function to its results
   def evaluate(self,inp):
     results=[n.evaluate(inp) for n in self.children]
     return self.function(results)
@@ -22,7 +27,8 @@ class node:
     for c in self.children:
       c.display(indent+1)
 
-
+#The class for nodes that only return one of the parameters passed to the program.
+#Its evaluate method returns the parameter specified by idx.
 class paramnode:
   def __init__(self,idx):
     self.idx=idx
